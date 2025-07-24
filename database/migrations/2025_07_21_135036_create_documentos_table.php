@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->id('api_id');
-            $table->integer('os_doc_id')->unique();
+            $table->integer('osdoc_id')->unique();
             $table->string('osdoc_obs');
             $table->string('osdoc_caminho')->unique();
             $table->integer('osdoc_os_id');

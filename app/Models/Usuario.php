@@ -32,4 +32,8 @@ class Usuario extends Authenticatable
     //caso eu quisesse decidir quais bloquear poderia fazer da seguinte forma (usar $fillable ou $guarded).
     //protected $guarded = [];
     //nesse caso irei usar somente $fillable para padronização do projeto.
+
+    protected $casts = [
+        'usu_validadesenha' => 'datetime',
+    ];
 }

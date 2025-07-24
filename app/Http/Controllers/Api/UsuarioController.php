@@ -60,6 +60,8 @@ class UsuarioController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Usuario::class);
+
         $users = Usuario::all();
 
         return response()->json([
@@ -72,6 +74,8 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->authorize('create', Usuario::class);
+
             $data = $request->validate($this->validationRules(), $this->validationMessages());
         } catch (ValidationException $e) {
             return response()->json([
@@ -107,6 +111,8 @@ class UsuarioController extends Controller
             ], 404);
         }
 
+        $this->authorize('view', $user);
+
         return response()->json([
             'status' => 'success',
             'message' => 'Usuário encontrado com sucesso.',
@@ -126,6 +132,8 @@ class UsuarioController extends Controller
             ], 404);
         }
 
+        $this->authorize('update', $user);
+
         $data = $request->validate([
             'usu_id' => ['sometimes', 'integer', Rule::unique('usuarios')->ignore($user->usu_id)],
             'fil_id' => 'sometimes|string',
@@ -136,8 +144,7 @@ class UsuarioController extends Controller
             'usu_validadesenha' => 'sometimes|date',
             'usu_pes_id' => 'sometimes|integer',
             'usu_pes_razao' => 'sometimes|string',
-            'usu_pes_cnpjcpf' => 'sometimes|string'
-
+            'usu_pes_cnpjcpf' => 'sometimes|string',
         ]);
 
         if (!empty($data['usu_senha'])) {
@@ -166,6 +173,8 @@ class UsuarioController extends Controller
                 'data' => null
             ], 404);
         }
+
+        $this->authorize('delete', $user);
 
         $user->delete();
 
