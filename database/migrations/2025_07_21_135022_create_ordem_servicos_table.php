@@ -18,14 +18,14 @@ return new class extends Migration
             $table->unsignedBigInteger('osproc_os_id');
             $table->unsignedInteger('osproc_seq');
             $table->string('fil_id');
-            $table->string('osproc_descricao');
+            $table->string('osproc_descricao')->nullable();
             $table->string('osproc_status', 1);
             $table->dateTime('osproc_dthriniprev');
             $table->dateTime('osproc_dthrfimprev');
-            $table->dateTime('osproc_dthrinireal');
-            $table->dateTime('osproc_dthrfimreal');
+            $table->dateTime('osproc_dthrinireal')->nullable();
+            $table->dateTime('osproc_dthrfimreal')->nullable();
             $table->dateTime('os_dthrcriacao');
-            $table->string('os_titulo');
+            $table->string('os_titulo')->nullable();
             $table->string('os_status', 1);
             $table->integer('os_api_id');
             $table->integer('os_pes_idresp');

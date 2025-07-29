@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\ApontamentoController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\DocumentoController;
 use App\Http\Controllers\Api\OrdemServicoController;
 
@@ -28,9 +28,9 @@ Route::prefix('v1')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/me', [AuthController::class, 'me']);
 
-        Route::apiResource('usuarios', UsuarioController::class)->except(['put']);
-        Route::apiResource('ordemservico', OrdemServicoController::class)->except(['put']);
-        Route::apiResource('apontamento', ApontamentoController::class)->except(['put']);
-        Route::apiResource('documento', DocumentoController::class)->except(['put']);
+        Route::apiResource('usuarios', UsuarioController::class);
+        Route::apiResource('ordemservico', OrdemServicoController::class);
+        Route::apiResource('apontamento', ApontamentoController::class);
+        Route::apiResource('documento', DocumentoController::class);
     });
 });

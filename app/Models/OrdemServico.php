@@ -35,4 +35,13 @@ class OrdemServico extends Model
         'sync_status',
         'update_at',
     ];
+    
+    protected $casts = [
+        'osproc_dthriniprev' => 'datetime',
+        'osproc_dthrfimprev' => 'datetime',
+        'osproc_dthrinireal' => 'datetime',
+        'osproc_dthrfimreal' => 'datetime',
+        'os_dthrcriacao' => 'datetime',
+        'update_at' => 'datetime',
+    ];
 }

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
 class Usuario extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasFactory, HasApiTokens, Notifiable;
 
     //define o nome da tabela, usar o mesmo que está no banco de dados.
     protected $table = 'usuarios';
@@ -32,6 +33,10 @@ class Usuario extends Authenticatable
     //caso eu quisesse decidir quais bloquear poderia fazer da seguinte forma (usar $fillable ou $guarded).
     //protected $guarded = [];
     //nesse caso irei usar somente $fillable para padronização do projeto.
+
+    protected $hidden = [
+        'usu_senha'
+    ];
 
     protected $casts = [
         'usu_validadesenha' => 'datetime',

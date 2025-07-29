@@ -18,7 +18,7 @@ class OrdemServicoController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Oredem de Serviço encontrado com sucesso.',
+            'message' => 'Oredem de Serviço encontrada com sucesso.',
             'data' => $order
         ], 200);
     }
@@ -41,7 +41,7 @@ class OrdemServicoController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Usuário criado com sucesso!',
+            'message' => 'Ordem de Serviço criada com sucesso!',
             'data' => $order
         ], 201);
     }
@@ -69,11 +69,47 @@ class OrdemServicoController extends Controller
 
     public function update(Request $request, OrdemServico $ordemServico)
     {
-        //
+        try {
+            $this->authorize('update', $ordemServico);
+
+            $data = $request->validated();
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Erro de Validação',
+                'data' => $e->errors(),
+            ], 400);
+        }
+
+        $ordemServico->update($data);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Ordem de Serviço criada com sucesso!',
+            'data' => $ordemServico,
+        ], 200);
     }
 
-    public function destroy(OrdemServico $ordemServico)
+    public function destroy(int $id)
     {
-        //
+        $order = OrdemServico::find($id);
+
+        if (!$order) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ordem de Serviço não encontrada.',
+                'data' => null
+            ], 404);
+        }
+
+        $this->authorize('delete', $order);
+
+        $order->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Ordem de Serviço deletada com sucesso!',
+            'data' => null
+        ], 200);
     }
 }

@@ -28,8 +28,8 @@ class StoreOrdemServicoRequest extends FormRequest
             'osproc_status' => ['required', 'string', 'max:1'],
             'osproc_dthriniprev' => ['required', 'date_format:Y-m-d H:i:s'],
             'osproc_dthrfimprev' => ['required', 'date_format:Y-m-d H:i:s'],
-            'osproc_dthrinireal' => ['required', 'date_format:Y-m-d H:i:s'],
-            'osproc_dthrfimreal' => ['required', 'date_format:Y-m-d H:i:s'],
+            'osproc_dthrinireal' => ['nullable', 'date_format:Y-m-d H:i:s'],
+            'osproc_dthrfimreal' => ['nullable', 'date_format:Y-m-d H:i:s'],
             'osproc_os_id' => ['required', 'integer'],
             'os_dthrcriacao' => ['required', 'date_format:Y-m-d H:i:s'],
             'os_titulo' => ['required', 'string'],
@@ -41,7 +41,7 @@ class StoreOrdemServicoRequest extends FormRequest
             'cli_pes_razao' => ['required', 'string'],
             'calc_endercompleto' => ['required', 'string'],
             'sync_status' => ['nullable', 'boolean'],
-            'update_at' => ['required', 'date_format:Y-m-d H:i:s'],
+            'update_at' => ['nullable', 'date_format:Y-m-d H:i:s'],
         ];
     }
 }
