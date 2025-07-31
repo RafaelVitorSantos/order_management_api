@@ -43,7 +43,7 @@ class LogRequestActivity
             Cache::put("alert_sent:$ip", true, now()->addHours(1));
 
             Mail::raw("O IP $ip ultrapassou o limite de requisições 5 vezes na última hora.", function ($message) {
-                $message->to("suporte@actiosolucoes.com")
+                $message->to("rafaelvitordossantos123@gmail.com")
                     ->subject('⚠️ IP suspeito detectado');
             });
 
