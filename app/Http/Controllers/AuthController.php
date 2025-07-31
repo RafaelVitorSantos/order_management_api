@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Models\Usuario;
 
 class AuthController extends Controller
 {
@@ -20,8 +20,9 @@ class AuthController extends Controller
         $user = Usuario::where('usu_login', $request->usu_login)->first();
 
         if (!$user || !Hash::check($request->usu_senha, $user->usu_senha)) {
-            throw ValidationException::withMessages([
-                'usu_login' => ['As credenciais estão incorretas.'],
+            return response()->json([
+                'status' => 'error',
+                'message' => 'As credenciais estão incorretas.',
             ]);
         }
 
@@ -31,7 +32,7 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'Login realizado com sucesso.',
             'token' => $token,
-            'data' => null
+            'data' => $user
         ]);
     }
 

@@ -21,8 +21,9 @@ use App\Http\Controllers\Api\DocumentoController;
 use App\Http\Controllers\Api\OrdemServicoController;
 
 Route::prefix('v1')->group(function () {
-    Route::post('/login', [AuthController::class, 'login'])->middleware(['block.ip', 'log.requests']);
-
+    //Route::post('/login', [AuthController::class, 'login'])->middleware(['block.ip', 'log.requests']);
+    Route::post('/login', [AuthController::class, 'login']);
+    
     Route::middleware('auth:sanctum')->group(function () {
         // Autenticação
         Route::post('/logout', [AuthController::class, 'logout']);

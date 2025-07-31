@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrdemServicoRequest;
+use App\Http\Requests\UpdateOrdemServicoRequest;
 use App\Models\OrdemServico;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class OrdemServicoController extends Controller
@@ -23,7 +23,7 @@ class OrdemServicoController extends Controller
         ], 200);
     }
 
-    public function store(Request $request)
+    public function store(StoreOrdemServicoRequest $request)
     {
         try {
             $this->authorize('store', OrdemServico::class);
@@ -67,7 +67,7 @@ class OrdemServicoController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, OrdemServico $ordemServico)
+    public function update(UpdateOrdemServicoRequest $request, OrdemServico $ordemServico)
     {
         try {
             $this->authorize('update', $ordemServico);

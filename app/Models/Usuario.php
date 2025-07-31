@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasFilters;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
@@ -9,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Usuario extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasApiTokens, HasFactory, HasFilters, Notifiable;
 
     //define o nome da tabela, usar o mesmo que está no banco de dados.
     protected $table = 'usuarios';
@@ -40,5 +41,24 @@ class Usuario extends Authenticatable
 
     protected $casts = [
         'usu_validadesenha' => 'datetime',
+    ];
+
+    //campo serve para mostrar quais campos podem ser filtrados
+    //foi definido no Concerns/HasFilters.php
+    protected $filterable = [
+        'usu_id',
+        'fil_id',
+        'usu_login',
+        'usu_senha',
+        'usu_master',
+        'usu_status',
+        'usu_validadesenha',
+        'usu_pes_id',
+        'usu_pes_razao',
+        'usu_pes_cnpjcpf',
+        //_like = parcial
+        'usu_login_like',
+        'usu_pes_razao_like',
+        'usu_pes_cnpjcpf_like',
     ];
 }
